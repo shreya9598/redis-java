@@ -2,6 +2,7 @@ package com.opredis;
 
 import java.io.*;
 import java.net.Socket;
+import com.opredis.handler.RespHandler;
 
 public class ClientHandler implements Runnable {
     private final Socket clientSocket;
@@ -50,6 +51,8 @@ public class ClientHandler implements Runnable {
 
                     // Now print the full raw command received
                     System.out.println("Full RESP command:\n" + rawCommand);
+
+                    RespHandler.hanndleResp(rawCommand.toString());
 
                     // Respond with OK just to test
                     output.write("+OK\r\n".getBytes());

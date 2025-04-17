@@ -52,10 +52,10 @@ public class ClientHandler implements Runnable {
                     // Now print the full raw command received
                     System.out.println("Full RESP command:\n" + rawCommand);
 
-                    RespHandler.hanndleResp(rawCommand.toString());
+                    byte [] response = RespHandler.hanndleResp(rawCommand.toString());
 
                     // Respond with OK just to test
-                    output.write("+OK\r\n".getBytes());
+                    output.write(response);
                     output.flush();
                 }
             }

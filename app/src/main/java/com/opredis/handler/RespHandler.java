@@ -6,7 +6,7 @@ import com.opredis.services.RespService;
 
 public class RespHandler{
 
-    public static byte[] hanndleResp(String str){
+    public static byte[] handleResp(String str){
         System.out.println("Handling RESP command: " + str);
         List<String> parseList = Resp.parse(str);
 
@@ -38,14 +38,15 @@ public class RespHandler{
     }
 
     public static byte[] setHandler(List<String> parseList){
-        if(parseList.size() < 3){
+        if(parseList.size() < 4){
             return Resp.error("Invalid RESP command");
         }
 
         String key = parseList.get(1);
         String val = parseList.get(2);
+        int ttlSec = Integer.parseInt(parseList.get(3));
 
-        RespService.setResp(key, val);
+        RespService.setResp(key, val, ttlSec);
         return Resp.OK;
     }
 }
